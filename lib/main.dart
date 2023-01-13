@@ -21,6 +21,6 @@ class MyApp extends StatelessWidget {
           'home': (context) => const HomeScreen(),
           'first': (context) => const LoginScreen()
         },
-        home: auth.currentUser!=null ? const HomeScreen() : const LoginScreen());
+        home: auth.currentUser!=null ? const HomeScreen() : const HomeScreen());
   }
 }
