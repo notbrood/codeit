@@ -175,15 +175,13 @@ class _HomeScreenState extends State<HomeScreen> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator(),);
             }
-            return Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                  return homeScreenQuestions(data["question"], data["description"], data["author_name"], data["author_picture"]);
-                }).toList(),
-              ),
+            return ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                return homeScreenQuestions(data["question"], data["description"], data["author_name"], data["author_picture"]);
+              }).toList(),
             );
           },
         ),
