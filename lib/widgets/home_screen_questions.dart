@@ -1,30 +1,86 @@
+import 'package:codeit/screens/answers_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:recase/recase.dart';
 
-Widget homeScreenQuestions(String ques, String desc, String author, String picUrl){
-  return Container(
-    padding: const EdgeInsets.all(15),
-    decoration: BoxDecoration(border: Border.all(color: Colors.white),),
-    child: Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Column(
+Widget homeScreenQuestions(
+        String ques,
+        String desc,
+        String author,
+        String picUrl,
+        List<dynamic> imgUrls,
+        String id,
+        List<dynamic> answers,
+        BuildContext context) =>
+    ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: const EdgeInsets.all(15),
+        color: Colors.white.withOpacity(0.05),
+        shadowColor: Colors.white10,
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             children: [
-              Image.network(picUrl),
-              Text(author, style: TextStyle(color: Colors.white),),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(60),
+                      child: Image.network(picUrl),
+                    ),
+                    Text(
+                      ReCase(author.substring(0, author.length - 10)).titleCase,
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ques,
+                      style: const TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                    Text(
+                      desc,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          overflow: TextOverflow.ellipsis),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
-        Expanded(
-          flex: 4,
-          child: Column(
-            children: [
-              Text(ques, style: const TextStyle(color: Colors.white),),
-              Text(desc, style: const TextStyle(color: Colors.white),)
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-}
+      ),
+      onPressed: () {
+        List<Widget> p = [];
+        for (var imgLink in imgUrls){
+          p.add(Image.network(imgLink));
+        }
+        Column col = Column(children: p,);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AnswerScreen(
+                    title: ques,
+                    images: col,
+                    desc: desc,
+                    id: id,
+                    answers: answers)));
+      },
+    );
