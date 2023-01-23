@@ -133,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     descriptionController.text, imagesLinks);
                                 questionController.text = "";
                                 imagesAdded = [];
+                                imagesLinks = [];
                                 descriptionController.text = "";
                               },
                               child: const Text("Submit"),
@@ -242,13 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
       var reference = storage.ref().child(
           "images/${auth.currentUser!.uid}/${DateTime.now().toString()}");
       var uploadTask = reference.putFile(File(image.path));
-
-      // Waits till the file is uploaded then stores the download url
       String location = await (await uploadTask).ref.getDownloadURL();
       imagesLinks.add(location);
     }
-    imagesLinks.clear();
-    imagesAdded.clear();
   }
 
   void buttonPressed(String text) {
