@@ -23,6 +23,8 @@ class AnswerScreen extends StatefulWidget {
 class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: bgColor,
@@ -41,9 +43,51 @@ class _AnswerScreenState extends State<AnswerScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.title, style: const TextStyle(color: Colors.white, fontSize: 30),),
-            Text(widget.desc, style: const TextStyle(color: Colors.white, fontSize: 15)),
-            widget.images
+            Row(
+              children: [
+                const Text(
+                  "Title: ",
+                  style: TextStyle(color: Colors.grey, fontSize: 30),
+                ),
+                Container(
+                    width: width * 0.8,
+                    child: Text(
+                      widget.title,
+                      style: const TextStyle(color: Colors.white, fontSize: 30),
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: height * 0.0125,
+            ),
+            Row(
+              children: [
+                const Text(
+                  "Desc: ",
+                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                ),
+                Container(
+                    child: Text(widget.desc,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 15)),
+                    width: width * 0.8),
+              ],
+            ),
+            SizedBox(
+              height: height * 0.025,
+            ),
+            widget.images,
+            SizedBox(
+              height: height * 0.0125,
+            ),
+            Text(
+              widget.answers.isEmpty ? "No answers available! " : "Answers: ",
+              style: const TextStyle(color: Colors.grey, fontSize: 15),
+            ),
+            SizedBox(
+              height: height * 0.0125,
+            ),
+            Column()
           ],
         ),
       ),

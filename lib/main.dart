@@ -15,12 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Codeit',
-        routes: {
-          'home': (context) => const HomeScreen(),
-          'first': (context) => const LoginScreen()
-        },
-        home: auth.currentUser!=null ? const HomeScreen() : const LoginScreen());
+      debugShowCheckedModeBanner: false,
+      title: 'Codeit',
+      routes: {
+        'home': (context) => const HomeScreen(),
+        'first': (context) => const LoginScreen()
+      },
+      home: auth.currentUser != null ? const HomeScreen() : const LoginScreen(),
+    );
   }
 }

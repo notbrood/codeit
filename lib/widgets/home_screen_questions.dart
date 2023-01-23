@@ -11,6 +11,7 @@ Widget homeScreenQuestions(
         String id,
         List<dynamic> answers,
         BuildContext context) =>
+
     ElevatedButton(
       style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -35,7 +36,7 @@ Widget homeScreenQuestions(
                       child: Image.network(picUrl),
                     ),
                     Text(
-                      ReCase(author.substring(0, author.length - 10)).titleCase,
+                      ReCase(author.substring(author.length - 10, author.length)).originalText.toUpperCase(),
                       style: const TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
@@ -70,7 +71,8 @@ Widget homeScreenQuestions(
       onPressed: () {
         List<Widget> p = [];
         for (var imgLink in imgUrls){
-          p.add(Image.network(imgLink));
+          p.add(Image.network(imgLink, height: 0.25*MediaQuery.of(context).size.height));
+          p.add(SizedBox(height: MediaQuery.of(context).size.height*0.025));
         }
         Column col = Column(children: p,);
         Navigator.push(
