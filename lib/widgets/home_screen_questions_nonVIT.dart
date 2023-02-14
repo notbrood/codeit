@@ -43,7 +43,7 @@ Widget homeScreenQuestions(
                     ReCase(author.substring(author.length - 10, author.length)).originalText.toUpperCase(),
                     style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                   ) : Text(
-                    author.split(" ")[0],
+                    author,
                     style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ],

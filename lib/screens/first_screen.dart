@@ -1,4 +1,6 @@
 import 'package:codeit/screens/home_screen.dart';
+import 'package:codeit/screens/non_vit_screen.dart';
+import 'package:codeit/screens/real_home_screen.dart';
 import 'package:codeit/utils/colors.dart';
 import 'package:codeit/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,12 +110,17 @@ class _LoginScreenState extends State<LoginScreen> {
           accessToken: googleSignInAuthentication.accessToken);
       await auth.signInWithCredential(authCredential);
       Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const RealHomeScreen()));
     }
     else if(googleSignInAccount != null){
-      await googleSignIn.signOut();
-      final x = SnackBar(content: const Text("Please login using VITB email id!"), backgroundColor: loginButtonColor.withOpacity(0.1),);
-      ScaffoldMessenger.of(context).showSnackBar(x);
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+      await auth.signInWithCredential(authCredential);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const NonVITScreen()));
     }
     else{
       final x = SnackBar(content: const Text("There was an error!"), backgroundColor: loginButtonColor.withOpacity(0.1),);
